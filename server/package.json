@@ -1,0 +1,10 @@
+{
+  "name": "react-chatapp-server",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
