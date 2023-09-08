@@ -1,0 +1,112 @@
+section {
+	height: 100%;
+	display: grid;
+	place-items: center;
+}
+
+header h1 {
+	font-weight: 700;
+	font-size: 1.9rem;
+}
+
+header p {
+	color: #64748b;
+}
+
+form {
+	width: 80%;
+	max-width: 400px;
+	display: grid;
+	gap: 1.5rem;
+}
+
+form .form-group {
+	display: grid;
+	gap: 0.6rem;
+}
+
+form .form-group .input-group {
+	position: relative;
+}
+
+form .form-group .input-group * {
+	transition: 150ms;
+}
+
+form .form-group .input-group input {
+	width: 100%;
+	padding: 1rem;
+	background: none;
+	outline: none;
+	border: none;
+	border: 1.5px solid #64748b;
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	color: #0f172a;
+}
+
+form .form-group .input-group input:focus, form .form-group .input-group input:not(:placeholder-shown) {
+	border-color: #0f172a;
+}
+
+form .form-group .input-group input:focus + label, form .form-group .input-group input:not(:placeholder-shown) + label {
+	top: 0;
+	background: #f8fafc;
+	font-size: 0.9rem;
+	color: #0f172a;
+	padding: 0 0.3rem;
+}
+
+form .form-group .input-group label {
+	color: #64748b;
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+}
+
+form p.success,
+form p.error {
+	padding: 1rem;
+	border: 1.5px solid;
+}
+
+form p.success {
+	border-color: #22c55e;
+	color: #22c55e;
+	background: #dcfce7;
+}
+
+form p.error {
+	border-color: #ef4444;
+	color: #ef4444;
+	background: #fee2e2;
+}
+
+.btn-group {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.btn-group button,
+.btn-group a {
+	padding: 0.75rem;
+	border-radius: 0.5rem;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+.btn-group button:first-child,
+.btn-group a:first-child {
+	flex: 1;
+	border: none;
+	background: #0f172a;
+	color: #f8fafc;
+}
+
+.btn-group button:last-child,
+.btn-group a:last-child {
+	border: 1.5px solid #0f172a;
+	background: transparent;
+	color: #0f172a;
+}

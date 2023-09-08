@@ -1,3 +1,6 @@
+$main: hsl(222, 47.4%, 11.2%);
+$accent: hsl(210, 40%, 98%);
+
 * {
 	padding: 0;
 	margin: 0;
@@ -7,6 +10,11 @@
 html {
 	font-size: 16px;
 	font-family: Sans-Serif;
+	color: $main;
+}
+
+body {
+	background: $accent;
 }
 
 #root {

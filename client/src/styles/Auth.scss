@@ -1,0 +1,126 @@
+$main: hsl(222, 47.4%, 11.2%);
+$secondary: hsl(215, 16.3%, 46.9%);
+$accent: hsl(210, 40%, 98%);
+$danger-main: hsl(0, 84.2%, 60.2%);
+$danger-bg: hsl(0, 93.3%, 94.1%);
+$success-main: hsl(142, 70.6%, 45.3%);
+$success-bg: hsl(141, 84.2%, 92.5%);
+
+
+section {
+	height: 100%;
+	display: grid;
+	place-items: center;
+}
+
+header {
+	h1 {
+		font-weight: 700;
+		font-size: 1.9rem;
+	}
+	
+	p {
+		color: $secondary;
+	}
+}
+
+form {
+	width: 80%;
+	max-width: 400px;
+	display: grid;
+	gap: 1.5rem;
+	
+	// Form inputs
+	.form-group {
+		display: grid;
+		gap: 0.6rem;
+		
+		.input-group {
+			position: relative;
+			
+			* {
+				transition: 150ms;
+			}
+			
+			input {
+				width: 100%;
+				padding: 1rem;
+				background: none;
+				outline: none;
+				border: none;
+				border: 1.5px solid $secondary;
+				border-radius: 0.5rem;
+				font-size: 1rem;
+				color: $main;
+				
+				&:focus,
+				&:not(:placeholder-shown) {
+					border-color: $main;
+				}
+				
+				&:focus + label,
+				&:not(:placeholder-shown) + label {
+					top: 0;
+					background: $accent;
+					font-size: 0.9rem;
+					color: $main;
+					padding: 0 0.3rem;
+				}
+			}
+			
+			label {
+				color: $secondary;
+				position: absolute;
+				top: 50%;
+				left: 1rem;
+				transform: translateY(-50%);
+			}
+		}
+	}
+	
+	// Status Indicators
+	p.success,
+	p.error {
+		padding: 1rem;
+		border: 1.5px solid;
+	}
+	
+	p.success {
+		border-color: $success-main;
+		color: $success-main;
+		background: $success-bg;
+	}
+	
+	p.error {
+		border-color: $danger-main;
+		color: $danger-main;
+		background: $danger-bg;
+	}
+}
+
+// Submit and navigation buttons
+.btn-group {
+	display: flex;
+	gap: 0.5rem;
+	
+	button,
+	a {
+		padding: 0.75rem;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		text-decoration: none;
+		
+		&:first-child {
+			flex: 1;
+			border: none;
+			background: $main;
+			color: $accent;
+		}
+		
+		&:last-child {
+			border: 1.5px solid $main;
+			background: transparent;
+			color: $main;
+		}
+	}
+}
