@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { checkAuth } from './utils/auth.js'
 // Components
 import LoadingPage from './components/LoadingPage'
 import LoginPage from './components/Auth/LoginPage'
@@ -12,7 +13,12 @@ export default function App() {
 	
 	// Check if previously logged in
 	useEffect(() => {
-		setLoading(false)
+		checkAuth()
+			.then(res => {
+				if(res.isLoggedIn) setUser(res.user)
+			})
+			.catch(() => console.error('Something went wrong.'))
+			.finally(() => setLoading(false))
 	}, [])
 	
 	if(loading) return <LoadingPage />
@@ -22,7 +28,7 @@ export default function App() {
 				path="/"
 				element={
 					user ?
-					<ChatRoom /> :
+					<ChatRoom user={user} setUser={setUser} /> :
 					<Navigate to="/login" />
 				}
 			/>

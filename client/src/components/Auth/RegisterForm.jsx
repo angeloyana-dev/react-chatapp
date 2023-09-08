@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom'
 
-export default function RegisterForm({ userInput, setUserInput }) {
+export default function RegisterForm({ requestStatus, setRequestStatus, userInput, setUserInput }) {
 	const handleUserInput = (e) => {
+		if(requestStatus.status) setRequestStatus({})
 		setUserInput({...userInput, [e.target.id]: e.target.value})
 	}
 	
 	return (
 		<>
 			<div className="form-group">
+				{
+					requestStatus.status &&
+					<p className={
+							requestStatus.status === 'success' ?
+							'success' : 'error'
+					}>{requestStatus.message}</p>
+				}
 				<div className="input-group">
 					<input
 						type="text"
