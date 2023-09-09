@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { checkAuth } from './utils/auth.js'
+// Icons
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faRightToBracket, faUser, faPaperPlane, faXmark } from '@fortawesome/free-solid-svg-icons'
+library.add(faRightToBracket, faUser, faPaperPlane, faXmark)
 // Components
 import LoadingPage from './components/LoadingPage'
 import LoginPage from './components/Auth/LoginPage'

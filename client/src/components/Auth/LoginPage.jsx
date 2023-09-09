@@ -52,7 +52,7 @@ export default function LoginPage({ setUser }) {
 	}
 	
 	return (
-		<section>
+		<section className="authentication">
 			<form onSubmit={handleLogin}>
 				<header>
 					<h1>Welcome!</h1>

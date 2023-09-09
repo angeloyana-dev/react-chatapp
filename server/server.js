@@ -3,12 +3,17 @@ const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
 const cors = require('cors')
+const requestIp = require('request-ip')
+const moment = require('moment-timezone')
+const getTimezone = require('./getTimezone.js')
 const session = require('express-session')
 const passport = require('passport')
 const initializePassport = require('./initializePassport.js')
 const mongoose = require('mongoose')
 const User = require('./userAuthSchema.js')
 const bcrypt = require('bcryptjs')
+const io = require('socket.io')(server, { cors: { origin: process.env.CLIENT_URL } })
+const setCommunication = require('./communication.js')
 
 // Middlewares
 app.use(cors({
@@ -16,6 +21,7 @@ app.use(cors({
 	credentials: true
 }))
 app.use(express.json())
+app.use(requestIp.mw())
 // Authentication middlewares
 app.use(session({
 	secret: process.env.SESSION_SECRET,
@@ -35,11 +41,14 @@ app.post('/auth/register', async (req, res) => {
 		if(existingUser) return res.json({ code: 400, message: 'Username is already taken.' })
 		
 		// If username doesn't exist yet.
+		const timezone = await getTimezone(req.clientIp)
 		const hashedPassword = bcrypt.hashSync(reqUser.password, 10)
 		const newUser = new User({
 			name: reqUser.name,
 			username: reqUser.username,
-			password: hashedPassword
+			password: hashedPassword,
+			dateCreated: moment().tz(timezone).toDate(),
+			timezone
 		})
 		await newUser.save()
 		res.json({ code: 200, message: 'Account was created successfully. Login your account to continue.' })
@@ -64,7 +73,7 @@ app.post('/auth/login', (req, res, next) => {
 				res.json({
 					code: 200,
 					message: 'User was logged in successfully.',
-					user: { id: user['_id'], name: user.name }
+					user: { id: user['_id'], name: user.name, timezone: user.timezone }
 				})
 			}
 		})
@@ -76,7 +85,8 @@ app.get('/auth/check', (req, res) => {
 	const isLoggedIn = req.isAuthenticated()
 	const user = isLoggedIn ? {
 		id: req.user['_id'],
-		name: req.user.name
+		name: req.user.name,
+		timezone: req.user.timezone
 	} : null
 	res.json({ code: 200, isLoggedIn, user })
 })
@@ -88,6 +98,8 @@ app.delete('/auth/logout', (req, res) => {
 	})
 })
 
+// Socket.io communications
+setCommunication(io)
 
 // Start server
 const PORT = process.env.PORT || 3000

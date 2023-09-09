@@ -1,0 +1,182 @@
+section.chat-room {
+	height: 100%;
+	position: relative;
+	/*** HEADER ***/
+	/*** SIDEBAR ***/
+	/*** MESSAGES CONTAINER ***/
+	/*** MESSAGE INPUT ***/
+}
+
+section.chat-room header {
+	width: 100%;
+	padding: 0.87rem;
+	background: #0f172a;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+section.chat-room header h1 {
+	color: #94a3b8;
+	font-size: 1.2rem;
+	font-weight: 400;
+}
+
+section.chat-room header p {
+	color: #94a3b8;
+	font-size: 0.8rem;
+	text-align: center;
+}
+
+section.chat-room header button {
+	border: none;
+	border-radius: 0.3rem;
+	background: #1e293b;
+	width: 2.1rem;
+	aspect-ratio: 1;
+}
+
+section.chat-room header button svg {
+	color: #94a3b8;
+	font-size: 1rem;
+}
+
+section.chat-room .side-bar {
+	width: 60%;
+	height: 100%;
+	background: #0f172a;
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 50;
+	overflow: hidden;
+	transition: 200ms;
+}
+
+section.chat-room .side-bar ul {
+	list-style-type: none;
+}
+
+section.chat-room .side-bar li {
+	padding: 1rem;
+	color: #94a3b8;
+	white-space: nowrap;
+}
+
+section.chat-room .side-bar li:hover {
+	background: #1e293b;
+}
+
+section.chat-room .side-bar.active {
+	width: 60%;
+}
+
+section.chat-room .side-bar.inactive {
+	width: 0;
+}
+
+section.chat-room .messages-container {
+	height: 100%;
+	padding: calc(0.87rem * 2 + 3.2rem + 3px) 1rem 4rem;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+section.chat-room .messages-container > div {
+	display: grid;
+}
+
+section.chat-room .messages-container > div > div {
+	max-width: 60%;
+}
+
+section.chat-room .messages-container > div > div:hover + .time {
+	height: 0.9rem;
+}
+
+section.chat-room .messages-container > div > div .name {
+	padding: 0 0.3rem;
+	display: block;
+	color: #64748b;
+	font-size: 0.9rem;
+}
+
+section.chat-room .messages-container > div > div .message {
+	padding: 0.7rem;
+	border-radius: 0.5rem;
+	word-break: break-word;
+}
+
+section.chat-room .messages-container > div.self-message > div {
+	margin-left: auto;
+}
+
+section.chat-room .messages-container > div.self-message .name {
+	text-align: right;
+}
+
+section.chat-room .messages-container > div.self-message .message {
+	background: #0f172a;
+	color: #94a3b8;
+}
+
+section.chat-room .messages-container > div.other-message > div {
+	margin-right: auto;
+}
+
+section.chat-room .messages-container > div.other-message .message {
+	background: #cbd5e1;
+	color: #0f172a;
+}
+
+section.chat-room .messages-container > div .time {
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	grid-row: 1;
+	text-align: center;
+	color: #64748b;
+	font-size: 0.9rem;
+	transition: 150ms;
+}
+
+section.chat-room .message-input {
+	width: 100%;
+	background: #f8fafc;
+	box-shadow: 0 0 0.5rem #00000020;
+	display: flex;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+section.chat-room .message-input input {
+	flex: 1;
+	padding: 1rem;
+	border: none;
+	background: transparent;
+	color: #0f172a;
+	font-size: 1rem;
+	outline: none;
+}
+
+section.chat-room .message-input input::placeholder {
+	color: #64748b;
+	font-size: 1rem;
+}
+
+section.chat-room .message-input button {
+	padding: 1rem;
+	border: none;
+	background: #0f172a;
+}
+
+section.chat-room .message-input button svg {
+	color: #94a3b8;
+	font-size: 1rem;
+}

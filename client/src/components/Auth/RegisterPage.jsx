@@ -28,7 +28,7 @@ export default function LoginPage() {
 							message: res.message
 						})
 						break
-					case 500:
+					case 400:
 						setRequestStatus({
 							status: 'error',
 							message: res.message
@@ -42,7 +42,7 @@ export default function LoginPage() {
 	}
 	
 	return (
-		<section>
+		<section className="authentication">
 			<form onSubmit={handleRegister}>
 				<header>
 					<h1>Welcome!</h1>
