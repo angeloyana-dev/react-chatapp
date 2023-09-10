@@ -23,10 +23,18 @@ app.use(cors({
 app.use(express.json())
 app.use(requestIp.mw())
 // Authentication middlewares
+app.set('trust proxy', 1)
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false,
-	saveUninitialized: false
+	saveUninitialized: false,
+	proxy: true,
+	cookie: {
+		httpOnly: false,
+		secure: true,
+		sameSite: 'none',
+		maxAge: 6.048e8
+	}
 }))
 app.use(passport.initialize())
 app.use(passport.session())
