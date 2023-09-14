@@ -82,6 +82,7 @@ section.chat-room .messages-container {
 	height: 100%;
 	padding: calc(0.87rem * 2 + 3.2rem + 3px) 1rem 4rem;
 	overflow-y: auto;
+	scroll-behavior: smooth;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;

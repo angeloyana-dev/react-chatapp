@@ -1,17 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import moment from 'moment-timezone'
 
 export default function Messages({ socket, user }) {
 	// Handle incoming messages
 	const [oldMessages, setOldMessages] = useState([])
 	const [currentMessages, setCurrentMessages] = useState([])
+	const [isDown, setIsDown] = useState(false)
+	const messageContainerRef = useRef(null)
+	const scrollDown = () => {
+		messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight
+		document.documentElement.scrollTop = document.documentElement.scrollHeight
+	}
 	
 	useEffect(() => {
 		const handleOldMessages = (oldMsgs) => {
 			setOldMessages(oldMsgs)
+			scrollDown()
 		}
 		const handleCurrentMessages = (newMessage) => {
 			setCurrentMessages(prevMessages => [...prevMessages, newMessage])
+			if(messageContainerRef.current.scrollTop + messageContainerRef.current.clientHeight >= messageContainerRef.current.scrollHeight) setIsDown(true)
 		}
 		
 		socket.on('old-messages', handleOldMessages)
@@ -21,6 +29,15 @@ export default function Messages({ socket, user }) {
 			socket.off('receive-message', handleCurrentMessages)
 		}
 	}, [socket])
+	
+	// Scroll down conditions
+	useEffect(() => {
+		window.onresize = () => scrollDown()
+		if(isDown) {
+			scrollDown()
+			setIsDown(false)
+		}
+	}, [window, currentMessages])
 	
 	const generateMessage = (messageInfo) => {
 		return (
@@ -44,7 +61,7 @@ export default function Messages({ socket, user }) {
 	}
 	
 	return (
-		<div className="messages-container">
+		<div ref={messageContainerRef} className="messages-container">
 			{
 				oldMessages.map(messageInfo => {
 					return generateMessage(messageInfo)
