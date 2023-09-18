@@ -4,8 +4,9 @@ import '../../styles/Auth.css'
 import { useLogin } from '../../utils/auth.js'
 import LoginForm from './LoginForm'
 
-
 export default function LoginPage({ setUser }) {
+	document.title = 'React Chat App | Login'
+	
 	const location = useLocation()
 	const [requestStatus, setRequestStatus] = useState(() => {
 		if(location.state) return {

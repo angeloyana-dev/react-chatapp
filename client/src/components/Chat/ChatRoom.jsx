@@ -12,6 +12,8 @@ const socket = io(import.meta.env.VITE_SERVER_URL || 'http://localhost:3000', {
 	autoConnect: false
 })
 export default function ChatRoom({ user, setUser }) {
+	document.title = 'React Chat App | Chat Room'
+	
 	// Toggle for sidebar
 	const [sideBar, setSideBar] = useState(false)
 	const handleSideBar = () => {

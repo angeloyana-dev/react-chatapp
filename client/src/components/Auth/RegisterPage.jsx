@@ -5,6 +5,8 @@ import { useRegister } from '../../utils/auth.js'
 import RegisterForm from './RegisterForm'
 
 export default function LoginPage() {
+	document.title = 'React Chat App | Create Account'
+	
 	const [requestStatus, setRequestStatus] = useState({
 		status: null,
 		message: ''
